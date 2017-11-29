@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+	<head>
+		<title>canvasExample</title>
+        <meta charset='utf-8' />
+	</head>
+	<body>
+		<canvas height='1320' width='1480' id='example'>Обновите браузер</canvas>
+		<script>
+			var example = document.getElementById("example"),
+			    ctx     = example.getContext('2d');
+
+f =100;
+d = true;
+k=1500;
+var timeid = setInterval(function (){
+draw();
+
+},50);
+
+function draw(){
+drawRope(60);
+}
+
+function drawRope(num){
+ctx.clearRect(0,0,example.width,example.height);
+l=10;
+m=100;
+w=m*num;
+console.log("Weight:" +w);
+startx=340;
+starty=0;
+k--;
+for(i=0;i<num;i++){ 
+ctx.beginPath();
+var time = new Date();
+t=w-i*m;
+console.log(f);
+grd=time.getSeconds() ;
+grd = (f)/(t/100);
+
+if (f<-k) d = false;
+if (f>k) d = true;
+if (d) f--; else f++;
+console.log("GRD: "+ grd);
+rad=grd*Math.PI/180;
+endx=startx+Math.sin(rad)*l;
+endy=starty+Math.cos(rad)*l;
+console.log("x:"+endx+" y:"+endy+"Cos:"+Math.sin(45));
+ctx.moveTo(startx,starty);
+ctx.lineTo(endx,endy);
+startx=endx;
+starty=endy;
+c=Math.round((255/num)*i);
+ctx.lineWidth=9;
+ctx.strokeStyle="rgb("+c+","+c+","+c+")";
+ctx.stroke();	
+
+}
+}	
+</script>
+	</body>
+</html>
